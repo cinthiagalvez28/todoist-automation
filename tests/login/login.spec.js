@@ -1,11 +1,43 @@
-// const { test, expect } = require('@playwright/test');
 const { test, expect } = require('../../lib/fixtures');
-const { loginPage } = require('../../pages/login/LoginPage');
-const { todayPage } = require('../../pages/today/TodayPage');
-const { USER_CREDENTIALS } = require('../../constants/TestData.js');
+const { USER_CREDENTIALS, MESSAGES, DEFAULT_TIMEOUT} = require('../../constants/TestData.js');
 
-test('As a standard user, I should be able to successful login', async ({ loginPage, todayPage }) => {  
-  await loginPage.goto();
-  await loginPage.login(USER_CREDENTIALS.EMAIL, USER_CREDENTIALS.PASSWORD);
-  await expect(todayPage.todayTitle).toBeVisible();
+test.describe('Login tests', () => {
+  
+  test.use({ storageState: undefined }); // In these tests, we do not need to store the session
+
+  // SUCCESFUL LOGIN TESTS
+  test('Successful login: As a standard user, I should be able to log in when I provide valid credentials.', async ({ loginPage, productsPage }) => {  
+    await loginPage.goto();
+    await loginPage.submitLoginForm(USER_CREDENTIALS.VALID_USER.USERNAME, USER_CREDENTIALS.VALID_USER.PASSWORD);
+    await expect(productsPage.productsTitle).toBeVisible({timeout: DEFAULT_TIMEOUT});
+  });
+
+
+  // UNSUCCESFUL LOGIN TESTS
+  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid username.', async ({ loginPage }) => {  
+    await loginPage.goto();
+    await loginPage.submitLoginForm(USER_CREDENTIALS.INVALID_USER.USERNAME, USER_CREDENTIALS.VALID_USER.PASSWORD);
+    await expect(loginPage.usernameAndPasswordDoesNotMatch).toBeVisible();
+  });
+
+
+  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid password.', async ({ loginPage }) => {  
+    await loginPage.goto();
+    await loginPage.submitLoginForm(USER_CREDENTIALS.VALID_USER.USERNAME, USER_CREDENTIALS.INVALID_USER.PASSWORD);
+    await expect(loginPage.usernameAndPasswordDoesNotMatch).toBeVisible();
+  });
+
+
+  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide an username.', async ({ loginPage }) => {  
+    await loginPage.goto();
+    await loginPage.submitLoginForm(null, USER_CREDENTIALS.VALID_USER.PASSWORD);
+    await expect(loginPage.usernameIsRequired).toBeVisible();
+  });
+
+
+  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a password.', async ({ loginPage }) => {  
+    await loginPage.goto();
+    await loginPage.submitLoginForm(USER_CREDENTIALS.VALID_USER.USERNAME, null);
+    await expect(loginPage.passwordIsRequired).toBeVisible();
+  });
 });

@@ -25,28 +25,46 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  /* Global set up to use authentication (to run each execution). */
+  globalSetup: require.resolve('./auth.setup.js'),
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    screenshot: 'on',
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
+    // LOGIN (sin sesión)
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'login',
+      testMatch: /.*login\/.*\.spec\.js/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: undefined
+      }
     },
-
+    // TODAS LAS DEMÁS PRUEBAS (con sesión)
+    {
+      name: 'authenticated',
+      testIgnore: /.*login\/.*\.spec\.js/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: require('path').resolve(__dirname, './auth.json')
+      }
+    }
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'] },
+    // },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
     // },
-
     // {
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
