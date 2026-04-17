@@ -1,0 +1,13 @@
+const { test, expect } = require('../../lib/fixtures');
+const { USER_CREDENTIALS, MESSAGES, DEFAULT_TIMEOUT} = require('../../constants/TestData.js');
+
+test.describe('Logout tests', () => {
+
+  // SUCCESFUL LOGOUT TEST
+  test('Successful logout: As a standard user, I should be able to log out.', async ({ productsPage,  loginPage }) => {
+    await productsPage.goto();
+    await productsPage.navBar.burgerMenuBtn.click();
+    await productsPage.sideBar.logoutBtn.click();
+    await expect(loginPage.loginButton).toBeVisible({timeout: DEFAULT_TIMEOUT});
+  });
+});
