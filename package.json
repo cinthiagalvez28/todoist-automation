@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:login" : "npx playwright test tests/login/login.spec.js",
-    "test:logout" : "npx playwright test tests/logout/logout.spec.js --headed"
+    "test:logout" : "npx playwright test tests/logout/logout.spec.js"
   },
   "keywords": [],
   "author": "",

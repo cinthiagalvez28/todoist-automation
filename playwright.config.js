@@ -1,5 +1,4 @@
 // @ts-check
-require('dotenv').config();
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -45,7 +44,7 @@ export default defineConfig({
       testMatch: /.*login\/.*\.spec\.js/,
       use: {
         ...devices['Desktop Chrome'],
-        storageState: undefined
+        storageState: undefined,
       }
     },
     // TODAS LAS DEMÁS PRUEBAS (con sesión)
@@ -54,7 +53,7 @@ export default defineConfig({
       testIgnore: /.*login\/.*\.spec\.js/,
       use: {
         ...devices['Desktop Chrome'],
-        storageState: require('path').resolve(__dirname, './auth.json')
+        storageState: require('path').resolve(__dirname, './auth.json'),
       }
     }
     // {

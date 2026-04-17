@@ -6,9 +6,9 @@ class LoginPage {
    */
   constructor(page) {
     this.page = page;
-    this.usernameInput = page.locator('#user-name');
-    this.passwordInput = page.locator('#password');
-    this.loginButton = page.locator('#login-button');
+    this.usernameInput = page.locator('data-test=username');
+    this.passwordInput = page.locator('data-test=password');
+    this.loginButton = page.locator('data-test=login-button');
     this.passwordIsRequired = page.getByText(MESSAGES.LOGIN.ERROR.PASSWORD_IS_REQUIRED);
     this.usernameIsRequired = page.getByText(MESSAGES.LOGIN.ERROR.USERNAME_IS_REQUIRED);
     this.usernameAndPasswordDoesNotMatch = page.getByText(MESSAGES.LOGIN.ERROR.USERNAME_AND_PASSWORD_DOES_NOT_MATCH);

@@ -3,7 +3,6 @@ require('dotenv').config();
 module.exports = {
     URLS: {
         BASE_URL: process.env.BASE_URL,
-        LOGIN: '/auth/login',
         PRODUCTS: '/inventory.html'
     },
     USER_CREDENTIALS: {
