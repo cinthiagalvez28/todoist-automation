@@ -7,7 +7,7 @@
     "lint": "eslint auth constants lib pages scripts tests",
     "pw": "npx playwright test",
     "allure": "node scripts/generate-allure.js",
-    "report": "npx allure open $(ls -td allure-reports/report_* | head -1)",
+    "report": "allure open allure-reports/latest",
     "test:login": "npm run pw -- tests/login/login.spec.js; npm run allure",
     "test:logout": "npm run pw -- tests/logout/logout.spec.js; npm run allure"
   },
