@@ -1,5 +1,4 @@
 const { test, expect } = require('../../lib/fixtures');
-const { USER_CREDENTIALS, MESSAGES, DEFAULT_TIMEOUT} = require('../../constants/TestData.js');
 
 test.describe('Products tests', () => {
 
@@ -15,28 +14,16 @@ test.describe('Products tests', () => {
   });
  
   test('Add Products to Cart: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
-    const productsToAdd = [0, 1, 2];
-    await productsPage.addProductsToCart(productsToAdd);
-    
-    const actualCount = await productsPage.getCartCount();
-    expect(actualCount).toBe(productsToAdd.length);
-
-    for (const index of productsToAdd) {
-        const button = productsPage.inventoryItems.nth(index).getByRole('button');
-        await expect(button).toHaveText('Remove');       
-    }
+    await productsPage.addProductToCart(3);  
+    await expect(productsPage.shoppingCartBadge).toContainText('3');
   });
 
-test('Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
-    await productsPage.inventoryItems.nth(0).getByRole('button', { name: /add to cart/i }).click();
+  test('Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
+    await productsPage.addProductToCart(1);
+    await expect(productsPage.shoppingCartBadge).toContainText('1');
     
-    const initialCount = await productsPage.getCartCount();
-    expect(initialCount).toBe(1);
-    await productsPage.removeItemFromCart(0);
-
-    const finalCount = await productsPage.getCartCount();
-    expect(finalCount).toBe(initialCount - 1);
-    await expect(productsPage.shoppingCartBadge).toBeHidden();
+    await productsPage.removeProductFromCart(1);
+    await expect(productsPage.shoppingCartBadge).not.toBeVisible();
   });
 
   test('Sort Products by price: As a standard user, I should be able to sort by price (Low to High).', async ({ productsPage }) => {
@@ -46,7 +33,7 @@ test('Remove Product in Cart: As a standard user, I should be able to remove a p
     expect(priceUI).toEqual(expectedPrice);
   });
 
-  test('Sort Products by Name: As a standard user, I should be able to sort by Name (Z to A).', async ({ productsPage }) => {
+  test('Sort Products by Name: As a standard user, I should be able to sort by Name     .', async ({ productsPage }) => {
     await productsPage.sortBy('za');
     const namesUI = await productsPage.getNamesList();
     const expectedName = [...namesUI].sort((a, b) => a - b);

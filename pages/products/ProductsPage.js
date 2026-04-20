@@ -18,34 +18,32 @@ class ProductsPage {
     this.shoppingCartBadge = page.locator('.shopping_cart_badge')
   }
 
-  async goto() {
-    
-    await this.page.goto(URLS.BASE_URL + URLS.PRODUCTS);
-  }
- 
-    /**
-     * @param {number[]} indexes - Ejemplo: [0, 2, 4]
-     */
-    async addProductsToCart(indexes) {
-        for (const index of indexes) {
-            const product = this.inventoryItems.nth(index);
-            await product.getByRole('button', { name: /add to cart/i }).click();
-        }
+    async goto() {
+      
+      await this.page.goto(URLS.BASE_URL + URLS.PRODUCTS);
     }
     
-    async getCartCount() {
-        if (await this.shoppingCartBadge.isVisible()) {
-            const count = await this.shoppingCartBadge.textContent();
-            return parseInt(count);
-        }
-        return 0;
+    async getRandomProducts(button, quantity) {
+    const count = await button.count();
+    const selectedIndices = Array.from({ length: count }, (_, i) => i)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.min(quantity, count));
+
+      for (const index of selectedIndices) {
+        await button.nth(index).click();
+      }
     }
 
-    async removeItemFromCart(index) {
-        const button = this.inventoryItems.nth(index).getByRole('button', { name: /remove/i });
-        await button.click();
+    async removeProductFromCart(quantity = 1) {
+        const removeButton = this.page.getByRole('button', { name: /remove/i });
+        await this.getRandomProducts(removeButton, quantity)
     }
 
+    async addProductToCart(quantity = 1) {
+        const addButton = this.page.getByRole('button', { name: /add to cart/i });
+        await this.getRandomProducts(addButton, quantity)
+    }
+    
     async getPricesList() {
         const texts = await this.inventoryItemPrice.allTextContents();
         // Convertimos ["$7.99", "$9.99"] -> [7.99, 9.99]
