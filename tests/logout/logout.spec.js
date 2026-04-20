@@ -1,5 +1,5 @@
 const { test, expect } = require('../../lib/fixtures');
-const { USER_CREDENTIALS, MESSAGES, DEFAULT_TIMEOUT} = require('../../constants/TestData.js');
+const { DEFAULT_TIMEOUT } = require('../../constants/TestData.js');
 
 test.describe('Logout tests', () => {
 
