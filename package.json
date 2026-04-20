@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint constants lib pages tests",
+    "lint": "eslint auth constants lib pages scripts tests",
     "pw": "npx playwright test",
     "allure": "node scripts/generate-allure.js",
     "report": "npx allure open $(ls -td allure-reports/report_* | head -1)",

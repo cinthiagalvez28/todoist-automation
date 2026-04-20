@@ -25,7 +25,7 @@ module.exports = async () => {
       }
       console.info('Sesión expirada, regenerando auth...');
       await browser.close();
-    } catch (e) {
+    } catch {
       console.info('Auth inválido, regenerando...');
       await browser.close();  
       }
