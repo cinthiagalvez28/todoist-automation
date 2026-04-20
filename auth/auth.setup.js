@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium, expect } = require('@playwright/test');
-const { LoginPage } = require('./pages/login/LoginPage');
-const { ProductsPage } = require('./pages/products/ProductsPage');
-const { USER_CREDENTIALS, DEFAULT_TIMEOUT } = require('./constants/TestData');
+const { LoginPage } = require('../pages/login/LoginPage');
+const { ProductsPage } = require('../pages/products/ProductsPage');
+const { USER_CREDENTIALS, DEFAULT_TIMEOUT } = require('../constants/TestData');
 
 const authPath = path.resolve(__dirname, './auth.json');
 
@@ -25,7 +25,7 @@ module.exports = async () => {
       }
       console.info('Sesión expirada, regenerando auth...');
       await browser.close();
-    } catch (e) {
+    } catch {
       console.info('Auth inválido, regenerando...');
       await browser.close();  
       }
