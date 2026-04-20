@@ -7,7 +7,7 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 .env
-auth.json
+/auth/auth.json
 /allure-reports/
 /allure-results/
 .DS_Store
