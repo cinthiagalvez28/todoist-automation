@@ -18,7 +18,7 @@ class ShoppingCartPage {
     await this.page.goto(URLS.BASE_URL + URLS.SHOOPING_CART);
   }
 
-async getCartItemNames() {
+  async getCartItemNames() {
     return await this.itemNames.allTextContents();
   }
 
