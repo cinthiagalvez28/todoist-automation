@@ -17,9 +17,7 @@ test.describe('Shopping cart tests', () => {
 
   // ADD MULTIPLE PRODUCTS TO THE SHOPPING CART AND VERIFY ALL WERE ADDED CORRECTLY
   test(`As a standard user, I should be able to add multiple products to the shopping cart and verify they were added.`, async ({ productsPage, shoppingCartPage }) => {
-    for (const productName of PRODUCT_NAMES) {
-      await productsPage.addProductByName(productName);
-    }
+    await productsPage.addProductsToCartByName('add', PRODUCT_NAMES);  
     await productsPage.navBar.shoppingCartBtn.click();
     const shoppingCartNames = await shoppingCartPage.getCartItemNames();
     expect(shoppingCartNames).toEqual(expect.arrayContaining(PRODUCT_NAMES));
@@ -28,19 +26,16 @@ test.describe('Shopping cart tests', () => {
 
   // ADD A SINGLE PRODUCT TO THE SHOPPING CART AND VERIFY IT WAS ADDED CORRECTLY
   test(`As a standard user, I should be able to add the product ${PRODUCT_NAMES[0]} to the shopping cart and verify that it was added.`, async ({ productsPage, shoppingCartPage }) => {
-    const productName = PRODUCT_NAMES[0];  
-    await productsPage.addProductByName(productName);
+    await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]); 
     await productsPage.navBar.shoppingCartBtn.click();
     const shoppingCartNames = await shoppingCartPage.getCartItemNames();
-    await expect(shoppingCartNames).toEqual([productName]);
+    await expect(shoppingCartNames).toEqual([PRODUCT_NAMES[0]]);
   });
 
 
   // ADD MULTIPLE PRODUCTS TO THE SHOPPING CART AND VERIFY THE SHOPPING CART BADGE IS UPDATED
   test('As a standard user, I should be able to add multiple products to the shopping cart and verify that the shopping cart badge is updated.', async ({ productsPage, shoppingCartPage }) => {
-    for (const productName of PRODUCT_NAMES) {
-      await productsPage.addProductByName(productName);
-    }
+    await productsPage.addProductsToCartByName('add', PRODUCT_NAMES); 
     const badgeProductPageNumberOfProducts = Number(await productsPage.navBar.shoppingCartBadgeSpan.textContent());
     await productsPage.navBar.shoppingCartBtn.click();
     const badgeShoppingCartPageNumberOfProducts = Number(await shoppingCartPage.navBar.shoppingCartBadgeSpan.textContent());
@@ -50,9 +45,7 @@ test.describe('Shopping cart tests', () => {
 
   // ADD MULTIPLE TO THE SHOPPING CART AND DELETED THEM
   test('As a standard user, I should be able to add multiple products to the shopping cart and delete them.', async ({ productsPage, shoppingCartPage }) => {
-    for (const productName of PRODUCT_NAMES) {
-      await productsPage.addProductByName(productName);
-    }
+    await productsPage.addProductsToCartByName('add', PRODUCT_NAMES); 
     await productsPage.navBar.shoppingCartBtn.click();
     for (let i = 0; i < PRODUCT_NAMES.length; i++) {
       await shoppingCartPage.removeProductByIndex(0);
