@@ -59,7 +59,7 @@ test.describe('Shopping cart tests', () => {
     for (let i = 0; i < randomCount; i++) {
       await shoppingCartPage.removeProductByIndex(0);
     }
-    expect(shoppingCartPage.shoppingCartItems).toHaveCount(0);
+    expect(shoppingCartPage.itemsDiv).toHaveCount(0);
     expect(shoppingCartPage.navBar.shoppingCartBadgeSpan).toHaveCount(0);
   });
 });

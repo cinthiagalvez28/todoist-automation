@@ -10,8 +10,8 @@ class ShoppingCartPage {
     this.page = page;
     this.sideBar = new SideBar(page);
     this.navBar = new NavBar(page);
-    this.cartItemNames = page.locator('[data-test="inventory-item-name"]');
-    this.shoppingCartItems = page.locator('.cart_item');
+    this.itemNames = page.locator('[data-test="inventory-item-name"]');
+    this.itemsDiv = page.locator('.cart_item');
   }
 
   async goto() {
@@ -19,11 +19,11 @@ class ShoppingCartPage {
   }
 
 async getCartItemNames() {
-    return await this.cartItemNames.allTextContents();
+    return await this.itemNames.allTextContents();
   }
 
   async removeProductByIndex(index) {
-    const product = this.shoppingCartItems.nth(index);
+    const product = this.itemsDiv.nth(index);
     await this.getRemoveProductButton(product).click();
   }
 
