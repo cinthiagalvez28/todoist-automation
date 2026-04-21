@@ -25,5 +25,10 @@ module.exports = {
             }
         }
     },
+    PRODUCT_NAMES: [
+        'Sauce Labs Backpack',
+        'Sauce Labs Bike Light',
+        'Sauce Labs Bolt T-Shirt'
+    ],
     DEFAULT_TIMEOUT: 15000
 };
