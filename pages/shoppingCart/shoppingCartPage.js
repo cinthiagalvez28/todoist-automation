@@ -1,0 +1,35 @@
+const { NavBar } = require('../component/NavBar')
+const { SideBar } = require('../component/SideBar')
+const { URLS } = require('../../constants/TestData');
+
+class ShoppingCartPage {
+  /**
+   * @param {import('@playwright/test').Page} page
+   */
+  constructor(page) {
+    this.page = page;
+    this.sideBar = new SideBar(page);
+    this.navBar = new NavBar(page);
+    this.cartItemNames = page.locator('[data-test="inventory-item-name"]');
+    this.shoppingCartItems = page.locator('.cart_item');
+  }
+
+  async goto() {
+    await this.page.goto(URLS.BASE_URL + URLS.SHOOPING_CART);
+  }
+
+async getCartItemNames() {
+    return await this.cartItemNames.allTextContents();
+  }
+
+  async removeProductByIndex(index) {
+    const product = this.shoppingCartItems.nth(index);
+    await this.getRemoveProductButton(product).click();
+  }
+
+  getRemoveProductButton(product) {
+    return product.getByRole('button', { name: 'Remove' });
+  }
+}
+
+module.exports = { ShoppingCartPage };

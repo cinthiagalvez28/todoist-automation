@@ -9,7 +9,8 @@
     "allure": "node scripts/generate-allure.js",
     "report": "allure open allure-reports/latest",
     "test:login": "npm run pw -- tests/login/login.spec.js; npm run allure",
-    "test:logout": "npm run pw -- tests/logout/logout.spec.js; npm run allure"
+    "test:logout": "npm run pw -- tests/logout/logout.spec.js; npm run allure",
+    "test:shopping_cart": "npm run pw -- tests/shoppingCart/shoppingCart.spec.js; npm run allure"
   },
   "keywords": [],
   "author": "",
