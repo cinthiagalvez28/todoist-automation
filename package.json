@@ -4,17 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:login" : "npx playwright test tests/login/login.spec.js",
-    "test:logout" : "npx playwright test tests/logout/logout.spec.js",
-    "test:products" : "npx playwright test tests/product/products.spec.js"
+    "lint": "eslint auth constants lib pages scripts tests",
+    "pw": "npx playwright test",
+    "allure": "node scripts/generate-allure.js",
+    "report": "allure open allure-reports/latest",
+    "test:login": "npm run pw -- tests/login/login.spec.js; npm run allure",
+    "test:logout": "npm run pw -- tests/logout/logout.spec.js; npm run allure",
+    "test:products": "npm run pw -- test tests/product/products.spec.js; npm run allure"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
-    "dotenv": "^17.4.2"
+    "allure-commandline": "^2.38.1",
+    "allure-playwright": "^3.7.1",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.2.1",
+    "eslint-plugin-playwright": "^2.10.2",
+    "globals": "^17.5.0"
   }
 }
