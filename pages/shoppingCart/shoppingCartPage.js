@@ -22,10 +22,6 @@ class ShoppingCartPage {
     return await this.itemNames.allTextContents();
   }
 
-  getProductByName(name) {
-    return this.itemsDiv.filter({ hasText: name });
-  }
-
   async removeProductByIndex(index) {
     const product = this.itemsDiv.nth(index);
     await this.getRemoveProductButton(product).click();
