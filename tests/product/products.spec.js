@@ -13,16 +13,24 @@ test.describe('Products tests', () => {
     await expect(items.last()).toBeVisible();
   });
  
-  test('Add Products to Cart: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
-    await productsPage.addProductToCart(3);  
+  test('Add Products to Cart by index: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
+    const productsToAdd = [1, 3, 4];
+    await productsPage.addProductToCartByIndex(productsToAdd);  
     await expect(productsPage.shoppingCartBadge).toContainText('3');
   });
 
+  test('Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
+    const productsToAdd = ['Sauce Labs Backpack','Sauce Labs Bike Light'];
+    await productsPage.addProductsToCartByName('add', productsToAdd);  
+    await expect(productsPage.shoppingCartBadge).toContainText('2');
+  });
+
   test('Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
-    await productsPage.addProductToCart(1);
+    const productsToAdd = [2];
+    await productsPage.addProductToCartByIndex(productsToAdd);
     await expect(productsPage.shoppingCartBadge).toContainText('1');
     
-    await productsPage.removeProductFromCart(1);
+    await productsPage.removeProductFromCart([0]);
     await expect(productsPage.shoppingCartBadge).not.toBeVisible();
   });
 

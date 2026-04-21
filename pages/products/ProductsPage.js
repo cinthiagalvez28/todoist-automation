@@ -23,27 +23,42 @@ class ProductsPage {
       await this.page.goto(URLS.BASE_URL + URLS.PRODUCTS);
     }
     
-    async getRandomProducts(button, quantity) {
-    const count = await button.count();
-    const selectedIndices = Array.from({ length: count }, (_, i) => i)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, Math.min(quantity, count));
-
-      for (const index of selectedIndices) {
-        await button.nth(index).click();
-      }
+    getSortedIndexes(array) {
+        return [...array].sort((a, b) => b - a);
     }
 
-    async removeProductFromCart(quantity = 1) {
-        const removeButton = this.page.getByRole('button', { name: /remove/i });
-        await this.getRandomProducts(removeButton, quantity)
+    handleButtonAction(action, context = this.page) {
+        const buttonNames = {
+            add: /add to cart/i,
+            remove: /remove/i
+        };
+        return context.getByRole('button', { name: buttonNames[action] });
     }
 
-    async addProductToCart(quantity = 1) {
-        const addButton = this.page.getByRole('button', { name: /add to cart/i });
-        await this.getRandomProducts(addButton, quantity)
+    async removeProductFromCart(indexes) {
+        const sortedIndexes = this.getSortedIndexes(indexes);
+        const removeButton = this.handleButtonAction('remove');
+        for (const index of sortedIndexes) {
+          await removeButton.nth(index).click();
+        }
+    }
+
+    async addProductToCartByIndex(indexes) {
+        const sortedIndexes = this.getSortedIndexes(indexes);
+        const addButton = this.handleButtonAction('add');       
+        for (const index of sortedIndexes) {
+          await addButton.nth(index).click();
+        }
     }
     
+    async addProductsToCartByName(action, productNames) {  
+        for (const name of productNames) {
+            const productContainer = this.inventoryItems.filter({ hasText: name });
+            const addButton = this.handleButtonAction('add', productContainer);
+            await addButton.click();
+        }
+    }
+
     async getPricesList() {
         const texts = await this.inventoryItemPrice.allTextContents();
         // Convertimos ["$7.99", "$9.99"] -> [7.99, 9.99]
