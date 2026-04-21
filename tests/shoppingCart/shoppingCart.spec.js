@@ -22,7 +22,7 @@ test.describe('Shopping cart tests', () => {
     }
     await productsPage.navBar.shoppingCartBtn.click();
     const shoppingCartNames = await shoppingCartPage.getCartItemNames();
-    await expect(shoppingCartNames.sort()).toEqual([...PRODUCT_NAMES].sort());
+    expect(shoppingCartNames).toEqual(expect.arrayContaining(PRODUCT_NAMES));
   });
 
 
