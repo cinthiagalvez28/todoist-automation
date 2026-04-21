@@ -33,7 +33,7 @@ test.describe('Products tests', () => {
     expect(priceUI).toEqual(expectedPrice);
   });
 
-  test('Sort Products by Name: As a standard user, I should be able to sort by Name     .', async ({ productsPage }) => {
+  test('Sort Products by Name: As a standard user, I should be able to sort by Name (Z to A).', async ({ productsPage }) => {
     await productsPage.sortBy('za');
     const namesUI = await productsPage.getNamesList();
     const expectedName = [...namesUI].sort((a, b) => a - b);
