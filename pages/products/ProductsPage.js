@@ -37,15 +37,6 @@ class ProductsPage {
     await this.getAddToCartButton(product).click();
   }
 
-  async getProductNameByIndex(index) {
-    const name = await this.inventoryItems
-      .nth(index)
-      .inventoryItemNames
-      .textContent();
-
-    return name?.trim();
-  }
-
   async addToCartByIndex(index) {
     const product = this.inventoryItems.nth(index);
     await this.getAddToCartButton(product).click();
@@ -53,11 +44,6 @@ class ProductsPage {
 
   getAddToCartButton(product) {
     return product.getByRole('button', { name: /add to cart/i });
-  }
-
-  async addRandomProduct() {
-    const index = await this.getRandomProductIndex();
-    await this.addToCartByIndex(index);
   }
 }
 
