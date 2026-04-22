@@ -12,10 +12,11 @@ class ShoppingCartPage {
     this.navBar = new NavBar(page);
     this.itemNames = page.locator('[data-test="inventory-item-name"]');
     this.itemsDiv = page.locator('.cart_item');
+    this.checkoutBtn = page.locator('#checkout');
   }
 
   async goto() {
-    await this.page.goto(URLS.BASE_URL + URLS.SHOOPING_CART);
+    await this.page.goto(URLS.BASE_URL + URLS.SHOPPING_CART);
   }
 
   async getCartItemNames() {

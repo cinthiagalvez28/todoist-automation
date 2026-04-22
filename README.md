@@ -8,6 +8,7 @@ Automation testing project using Playwright, JavaScript, and GitHub Actions.
 * [Playwright](https://playwright.dev/) - Automation framework.
 * [JavaScript](https://mozilla.org) - Programming language.
 * [Allure Report](https://allurereport.org) - Test reporting tool.
+* [Faker.js](https://fakerjs.dev/) - Library that generates fake data.
 * [GitHub Actions](https://github.com) - CI/CD pipeline.
 
 # 📋 Pre-Requisites
@@ -39,10 +40,14 @@ TODOIST-AUTOMATION/
 │   │   └── SideBar.js
 │   ├── login/                      # Login page logic
 │   │   └── LoginPage.js
+│   ├── overview/                   # Overview page logic
+│   │   └── OverviewPage.js
 │   ├── products/                   # Products page logic
 │   │   └── ProductsPage.js
-│   └── shoppingCart/               # Shopping Cart page logic
-│       └── shoppingCartPage.js
+│   ├── shoppingCart/               # Shopping Cart page logic
+│   │   └── ShoppingCartPage.js
+│   └── yourInformation/            # Your Information page logic
+│       └── YourInformationPage.js
 ├── tests/                          # Test scripts organized by modules
 │   ├── login/
 │   │   └── login.spec.js
@@ -50,8 +55,10 @@ TODOIST-AUTOMATION/
 │   │   └── logout.spec.js
 │   ├── products/
 │   │   └── products.spec.js
-│   └── shoppingCart/
-│       └── shoppingCart.spec.js
+│   ├── shoppingCart/
+│   │   └── shoppingCart.spec.js
+│   └── yourInformation/
+│       └── yourInformation.spec.js
 ├── .env                            # Environment variables (Credentials, URLs)
 ├── .gitignore                      # Files and folders excluded from Git
 ├── eslint.config.mjs               # Linter rules configuration
@@ -83,6 +90,7 @@ The following core libraries are required to run and manage this testing framewo
 - **@playwright/test**: Core execution framework.
 - **eslint** & **eslint-plugin-playwright**: Static code analysis and Playwright best practices.
 - **allure-playwright** & **allure-commandline**: Detailed HTML test reporting.
+- **faker.js**: Library that generates fake data for testing scenarios.
 
 # 🚀 Running Tests
 
@@ -93,6 +101,7 @@ The following core libraries are required to run and manage this testing framewo
 | `npm run test:logout` | Run only Logout tests. |
 | `npm run test:products` | Run only Products tests. |
 | `npm run test:shopping_cart` | Run only Shopping Cart tests. |
+| `npm run test:your_information` | Run only Your Information tests. |
 | `npm run report` | Generate and open the last Allure report. |
 | `npm run lint` | Execute linter to verify the code quality. 
 

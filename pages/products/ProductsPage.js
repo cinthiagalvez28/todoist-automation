@@ -27,8 +27,8 @@ class ProductsPage {
 
   handleButtonAction(action, context = this.page) {
     const buttonNames = {
-        add: /add to cart/i,
-        remove: /remove/i
+      add: /add to cart/i,
+      remove: /remove/i
     };
     return context.getByRole('button', { name: buttonNames[action] });
   }
