@@ -1,4 +1,5 @@
 const { test, expect } = require('../../lib/fixtures');
+const { PRODUCT_NAMES } = require('../../constants/TestData.js');
 
 test.describe('Products tests', () => {
 
@@ -19,10 +20,10 @@ test.describe('Products tests', () => {
     await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('3');
   });
 
-  test('@smoke Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
-    const productsToAdd = ['Sauce Labs Backpack','Sauce Labs Bike Light'];
-    await productsPage.addProductsToCartByName('add', productsToAdd);  
-    await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('2');
+  test('@smoke Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage, shoppingCartPage}) => {
+    await productsPage.addProductsToCartByName('add',PRODUCT_NAMES); 
+    const shoppingCartNames = await shoppingCartPage.getCartItemNames();
+    expect(shoppingCartNames).toEqual(expect.arrayContaining(PRODUCT_NAMES));
   });
 
   test('@smoke Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {

@@ -35,20 +35,24 @@ TODOIST-AUTOMATION/
 ├── lib/                            # Utilities and Fixtures configuration
 │   └── fixtures.js
 ├── pages/                          # Page Object Model (POM) implementation
+│   ├── checkout/                   # Checkout page logic
+│   │   ├── CompletePage.js
+│   │   ├── OverviewPage.js
+│   │   ├── YourInformationPage.js
 │   ├── component/                  # Reusable components (UI fragments)
 │   │   ├── NavBar.js
 │   │   └── SideBar.js
 │   ├── login/                      # Login page logic
 │   │   └── LoginPage.js
-│   ├── overview/                   # Overview page logic
-│   │   └── OverviewPage.js
 │   ├── products/                   # Products page logic
 │   │   └── ProductsPage.js
 │   ├── shoppingCart/               # Shopping Cart page logic
 │   │   └── ShoppingCartPage.js
-│   └── yourInformation/            # Your Information page logic
-│       └── YourInformationPage.js
 ├── tests/                          # Test scripts organized by modules
+│   ├── checkout/
+│   │   └── checkoutFlow.spec.js
+│   │   └── overview.spec.js
+│   │   └── yourInformation.spec.js
 │   ├── login/
 │   │   └── login.spec.js
 │   ├── logout/
@@ -57,8 +61,6 @@ TODOIST-AUTOMATION/
 │   │   └── products.spec.js
 │   ├── shoppingCart/
 │   │   └── shoppingCart.spec.js
-│   └── yourInformation/
-│       └── yourInformation.spec.js
 ├── .env                            # Environment variables (Credentials, URLs)
 ├── .gitignore                      # Files and folders excluded from Git
 ├── eslint.config.mjs               # Linter rules configuration
@@ -103,7 +105,9 @@ The following core libraries are required to run and manage this testing framewo
 | `npm run test:logout` | Run only Logout tests. |
 | `npm run test:products` | Run only Products tests. |
 | `npm run test:shopping_cart` | Run only Shopping Cart tests. |
-| `npm run test:your_information` | Run only Your Information tests. |
+| `npm run test:your_information` | Run only Checkout: Your Information tests. |
+| `npm run test:overview` | Run only Checkout: Overview tests. |
+| `npm run test:checkout` | Run only Checkout: Complete tests. |
 | `npm run report` | Generate and open the last Allure report. |
 | `npm run lint` | Execute linter to verify the code quality. 
 

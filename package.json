@@ -19,7 +19,9 @@
     "test:logout": "npm run pw -- tests/logout/logout.spec.js",
     "test:products": "npm run pw -- tests/products/products.spec.js",
     "test:shopping_cart": "npm run pw -- tests/shoppingCart/shoppingCart.spec.js",
-    "test:your_information": "npm run pw -- tests/yourInformation/yourInformation.spec.js"
+    "test:your_information": "npm run pw -- tests/checkout/yourInformation.spec.js",
+    "test:overview": "npm run pw -- tests/checkout/overview.spec.js",
+    "test:complete": "npm run pw -- tests/checkout/complete.spec.js"
   },
   "keywords": [],
   "author": "",

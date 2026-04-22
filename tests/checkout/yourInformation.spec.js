@@ -1,20 +1,12 @@
 const { faker } = require('@faker-js/faker');
-const { test, expect } = require('../../lib/fixtures');
+const { test, expect } = require('../../lib/fixtures.js');
 const { PRODUCT_NAMES, MESSAGES, DEFAULT_TIMEOUT } = require('../../constants/TestData.js');
 
-test.describe('Your information tests', () => {
+test.describe('Checkout: Your information tests', () => {
   
-  test.beforeEach(async ({ productsPage, shoppingCartPage }) => {
-    await shoppingCartPage.goto();
-    if (await shoppingCartPage.navBar.shoppingCartBadgeSpan.isVisible()) {
-      const items = Number(await shoppingCartPage.navBar.shoppingCartBadgeSpan.textContent());
-      for (let i = 0; i < items; i++) {
-        await shoppingCartPage.removeProductByIndex(0); 
-      }
-    }
+  test.beforeEach(async ({ productsPage }) => {
     await productsPage.goto();
   });
-
 
   // FILL ALL THE INPUTS AND BE REDIRECTED TO THE OVERVIEW PAGE
   test(`@smoke As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
@@ -24,7 +16,6 @@ test.describe('Your information tests', () => {
     await yourInformationPage.submitYourInformationForm(faker.person.firstName(), faker.person.lastName(), faker.location.zipCode('#####'));
     await expect(overviewPage.overviewTitle).toBeVisible({timeout: DEFAULT_TIMEOUT});
   });
-
 
   // YOUR INFORMATION FORM
   test(`@smoke As a standard user, I should not be able to leave all the inputs empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
@@ -80,7 +71,7 @@ test.describe('Your information tests', () => {
     await expect(yourInformationPage.page.getByRole('heading', { name: MESSAGES.YOUR_INFORMATION.ERROR.LAST_NAME_IS_REQUIRED, level: 3 })).toBeVisible();
   });
 
-
+  
   test(`As a standard user, I should not be able to leave only the zip input empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();
