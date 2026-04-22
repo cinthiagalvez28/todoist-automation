@@ -15,66 +15,64 @@ class ProductsPage {
     this.inventoryItemPrice = page.locator('.inventory_item_price');
     this.inventoryItemName = page.locator('.inventory_item_name');
     this.productSortContainer = page.locator('data-test=product-sort-container');
-    this.shoppingCartBadge = page.locator('.shopping_cart_badge')
   }
 
-    async goto() {
-      
-      await this.page.goto(URLS.BASE_URL + URLS.PRODUCTS);
-    }
-    
-    getSortedIndexes(array) {
-        return [...array].sort((a, b) => b - a);
-    }
+  async goto() {
+    await this.page.goto(URLS.BASE_URL + URLS.PRODUCTS);
+  }
+  
+  getSortedIndexes(array) {
+    return [...array].sort((a, b) => b - a);
+  }
 
-    handleButtonAction(action, context = this.page) {
-        const buttonNames = {
-            add: /add to cart/i,
-            remove: /remove/i
-        };
-        return context.getByRole('button', { name: buttonNames[action] });
-    }
+  handleButtonAction(action, context = this.page) {
+    const buttonNames = {
+        add: /add to cart/i,
+        remove: /remove/i
+    };
+    return context.getByRole('button', { name: buttonNames[action] });
+  }
 
-    async removeProductFromCart(indexes) {
-        const sortedIndexes = this.getSortedIndexes(indexes);
-        const removeButton = this.handleButtonAction('remove');
-        for (const index of sortedIndexes) {
-          await removeButton.nth(index).click();
-        }
+  async removeProductFromCart(indexes) {
+    const sortedIndexes = this.getSortedIndexes(indexes);
+    const removeButton = this.handleButtonAction('remove');
+    for (const index of sortedIndexes) {
+      await removeButton.nth(index).click();
     }
+  }
 
-    async addProductToCartByIndex(indexes) {
-        const sortedIndexes = this.getSortedIndexes(indexes);
-        const addButton = this.handleButtonAction('add');       
-        for (const index of sortedIndexes) {
-          await addButton.nth(index).click();
-        }
+  async addProductToCartByIndex(indexes) {
+    const sortedIndexes = this.getSortedIndexes(indexes);
+    const addButton = this.handleButtonAction('add');       
+    for (const index of sortedIndexes) {
+      await addButton.nth(index).click();
     }
-    
-    async addProductsToCartByName(action, productNames) {  
-        for (const name of productNames) {
-            const productContainer = this.inventoryItems.filter({ hasText: name });
-            const addButton = this.handleButtonAction('add', productContainer);
-            await addButton.click();
-        }
+  }
+  
+  async addProductsToCartByName(action, productNames) {  
+    for (const name of productNames) {
+      const productContainer = this.inventoryItems.filter({ hasText: name });
+      const addButton = this.handleButtonAction('add', productContainer);
+      await addButton.click();
     }
+  }
 
-    async getPricesList() {
-        const texts = await this.inventoryItemPrice.allTextContents();
-        // Convertimos ["$7.99", "$9.99"] -> [7.99, 9.99]
-        return texts.map(price => parseFloat(price.replace('$', '')));
-    }
+  async getPricesList() {
+    const texts = await this.inventoryItemPrice.allTextContents();
+    // Convertimos ["$7.99", "$9.99"] -> [7.99, 9.99]
+    return texts.map(price => parseFloat(price.replace('$', '')));
+  }
 
-    async getNamesList() {
-        return await this.inventoryItemName.allTextContents();
-    }
+  async getNamesList() {
+    return await this.inventoryItemName.allTextContents();
+  }
 
-    /**
-     * @param {string} option - El valor del select ('lohi', 'hilo', 'az', 'za')
-     */
-    async sortBy(option) {
-        await this.productSortContainer.selectOption(option);
-    }
+  /**
+   * @param {string} option - El valor del select ('lohi', 'hilo', 'az', 'za')
+   */
+  async sortBy(option) {
+    await this.productSortContainer.selectOption(option);
+  }
 }
 
 module.exports = { ProductsPage };

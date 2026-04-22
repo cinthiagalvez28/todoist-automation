@@ -3,7 +3,8 @@ require('dotenv').config();
 module.exports = {
     URLS: {
         BASE_URL: process.env.BASE_URL,
-        PRODUCTS: '/inventory.html'
+        PRODUCTS: '/inventory.html',
+        SHOOPING_CART: '/cart.html'
     },
     USER_CREDENTIALS: {
         VALID_USER: {
@@ -24,5 +25,10 @@ module.exports = {
             }
         }
     },
+    PRODUCT_NAMES: [
+        'Sauce Labs Backpack',
+        'Sauce Labs Bike Light',
+        'Sauce Labs Bolt T-Shirt'
+    ],
     DEFAULT_TIMEOUT: 15000
 };
