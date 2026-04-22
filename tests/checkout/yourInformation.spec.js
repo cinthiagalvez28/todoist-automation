@@ -16,7 +16,7 @@ test.describe('Checkout: Your information tests', () => {
   });
 
   // FILL ALL THE INPUTS AND BE REDIRECTED TO THE OVERVIEW PAGE
-  test(`As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
+  test(`@smoke As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();
     await shoppingCartPage.checkoutBtn.click();
@@ -24,9 +24,8 @@ test.describe('Checkout: Your information tests', () => {
     await expect(overviewPage.overviewTitle).toBeVisible({timeout: DEFAULT_TIMEOUT});
   });
 
-
   // YOUR INFORMATION FORM
-  test(`As a standard user, I should not be able to leave all the inputs empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
+  test(`@smoke As a standard user, I should not be able to leave all the inputs empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();
     await shoppingCartPage.checkoutBtn.click();
@@ -79,7 +78,7 @@ test.describe('Checkout: Your information tests', () => {
     await expect(yourInformationPage.page.getByRole('heading', { name: MESSAGES.YOUR_INFORMATION.ERROR.LAST_NAME_IS_REQUIRED, level: 3 })).toBeVisible();
   });
 
-
+  
   test(`As a standard user, I should not be able to leave only the zip input empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();

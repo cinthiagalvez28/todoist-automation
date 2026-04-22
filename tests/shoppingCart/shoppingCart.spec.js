@@ -25,7 +25,7 @@ test.describe('Shopping cart tests', () => {
 
 
   // ADD A SINGLE PRODUCT TO THE SHOPPING CART AND VERIFY IT WAS ADDED CORRECTLY
-  test(`As a standard user, I should be able to add the product ${PRODUCT_NAMES[0]} to the shopping cart and verify that it was added.`, async ({ productsPage, shoppingCartPage }) => {
+  test(`@smoke As a standard user, I should be able to add the product ${PRODUCT_NAMES[0]} to the shopping cart and verify that it was added.`, async ({ productsPage, shoppingCartPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]); 
     await productsPage.navBar.shoppingCartBtn.click();
     const shoppingCartNames = await shoppingCartPage.getCartItemNames();
@@ -44,7 +44,7 @@ test.describe('Shopping cart tests', () => {
 
 
   // ADD MULTIPLE TO THE SHOPPING CART AND DELETED THEM
-  test('As a standard user, I should be able to add multiple products to the shopping cart and delete them.', async ({ productsPage, shoppingCartPage }) => {
+  test('@smoke As a standard user, I should be able to add multiple products to the shopping cart and delete them.', async ({ productsPage, shoppingCartPage }) => {
     await productsPage.addProductsToCartByName('add', PRODUCT_NAMES); 
     await productsPage.navBar.shoppingCartBtn.click();
     for (let i = 0; i < PRODUCT_NAMES.length; i++) {

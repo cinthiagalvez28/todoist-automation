@@ -6,7 +6,7 @@ test.describe('Products tests', () => {
     await productsPage.goto();
   }); 
  
-  test('Load Products: As a standard user, I should be able to see the products loaded.', async ({ productsPage }) => {
+  test('@smoke Load Products: As a standard user, I should be able to see the products loaded.', async ({ productsPage }) => {
     const items = productsPage.inventoryItems;
     await expect(items).toHaveCount(6);
     await expect(items.first()).not.toBeEmpty();
@@ -19,13 +19,13 @@ test.describe('Products tests', () => {
     await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('3');
   });
 
-  test('Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
+  test('@smoke Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
     const productsToAdd = ['Sauce Labs Backpack','Sauce Labs Bike Light'];
     await productsPage.addProductsToCartByName('add', productsToAdd);  
     await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('2');
   });
 
-  test('Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
+  test('@smoke Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
     const productsToAdd = [2];
     await productsPage.addProductToCartByIndex(productsToAdd);
     await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('1');
