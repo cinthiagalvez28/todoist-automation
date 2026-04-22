@@ -17,7 +17,7 @@ test.describe('Your information tests', () => {
 
 
   // FILL ALL THE INPUTS AND BE REDIRECTED TO THE OVERVIEW PAGE
-  test(`As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
+  test(`@smoke As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();
     await shoppingCartPage.checkoutBtn.click();
@@ -27,7 +27,7 @@ test.describe('Your information tests', () => {
 
 
   // YOUR INFORMATION FORM
-  test(`As a standard user, I should not be able to leave all the inputs empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
+  test(`@smoke As a standard user, I should not be able to leave all the inputs empty.`, async ({ productsPage, shoppingCartPage, yourInformationPage }) => {
     await productsPage.addProductsToCartByName('add', [PRODUCT_NAMES[0]]);  
     await productsPage.navBar.shoppingCartBtn.click();
     await shoppingCartPage.checkoutBtn.click();

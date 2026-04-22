@@ -5,14 +5,21 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint auth constants lib pages scripts tests",
-    "pw": "npx playwright test; npm run allure",
     "allure": "node scripts/generate-allure.js",
     "report": "allure open allure-reports/latest",
-    "test:login": "npm run pw -- tests/login/login.spec.js; npm run allure",
-    "test:logout": "npm run pw -- tests/logout/logout.spec.js; npm run allure",
-    "test:products": "npm run pw -- tests/products/products.spec.js; npm run allure",
-    "test:shopping_cart": "npm run pw -- tests/shoppingCart/shoppingCart.spec.js; npm run allure",
-    "test:your_information": "npm run pw -- tests/yourInformation/yourInformation.spec.js; npm run allure"
+
+    "pw": "npx playwright test",
+    "postpw": "npm run allure",
+    "pw:smoke": "npm run pw -- --grep @smoke",
+
+    "test:smoke": "npm run pw:smoke",
+    "test:regression": "npm run pw",
+
+    "test:login": "npm run pw -- tests/login/login.spec.js",
+    "test:logout": "npm run pw -- tests/logout/logout.spec.js",
+    "test:products": "npm run pw -- tests/products/products.spec.js",
+    "test:shopping_cart": "npm run pw -- tests/shoppingCart/shoppingCart.spec.js",
+    "test:your_information": "npm run pw -- tests/yourInformation/yourInformation.spec.js"
   },
   "keywords": [],
   "author": "",

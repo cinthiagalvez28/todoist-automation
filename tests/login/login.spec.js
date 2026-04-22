@@ -11,20 +11,20 @@ test.describe('Login tests', () => {
 
 
   // SUCCESFUL LOGIN TESTS
-  test('Successful login: As a standard user, I should be able to log in when I provide valid credentials.', async ({ loginPage, productsPage }) => {  
+  test('@smoke Successful login: As a standard user, I should be able to log in when I provide valid credentials.', async ({ loginPage, productsPage }) => {  
     await loginPage.submitLoginForm(USER_CREDENTIALS.VALID_USER.USERNAME, USER_CREDENTIALS.VALID_USER.PASSWORD);
     await expect(productsPage.productsTitle).toBeVisible({timeout: DEFAULT_TIMEOUT});
   });
 
 
   // UNSUCCESFUL LOGIN TESTS
-  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid username.', async ({ loginPage }) => {
+  test('@smoke Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid username.', async ({ loginPage }) => {
     await loginPage.submitLoginForm(USER_CREDENTIALS.INVALID_USER.USERNAME, USER_CREDENTIALS.VALID_USER.PASSWORD);
     await expect(loginPage.usernameAndPasswordDoesNotMatch).toBeVisible();
   });
 
 
-  test('Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid password.', async ({ loginPage }) => {
+  test('@smoke Unsuccessful login: As a standard user, I should not be able to log in when I don\'t provide a valid password.', async ({ loginPage }) => {
     await loginPage.submitLoginForm(USER_CREDENTIALS.VALID_USER.USERNAME, USER_CREDENTIALS.INVALID_USER.PASSWORD);
     await expect(loginPage.usernameAndPasswordDoesNotMatch).toBeVisible();
   });

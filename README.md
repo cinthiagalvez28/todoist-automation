@@ -96,7 +96,9 @@ The following core libraries are required to run and manage this testing framewo
 
 | Comando | Descripción |
 | :--- | :--- |
-| `npm run pw` | Run all tests in headless mode. |
+| `npm run pw` | Motor base. |
+| `npm run test:smoke` | Run the most critical test scenarios. |
+| `npm run test:regression` | Run all the tests. |
 | `npm run test:login` | Run only Login tests. |
 | `npm run test:logout` | Run only Logout tests. |
 | `npm run test:products` | Run only Products tests. |
