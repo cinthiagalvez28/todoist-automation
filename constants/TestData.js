@@ -6,7 +6,8 @@ module.exports = {
         PRODUCTS: '/inventory.html',
         SHOPPING_CART: '/cart.html',
         YOUR_INFORMATION: '/checkout-step-one.html',
-        OVERVIEW: '/checkout-step-two.html'
+        OVERVIEW: '/checkout-step-two.html',
+        COMPLETE: 'checkout-complete.html'
     },
     USER_CREDENTIALS: {
         VALID_USER: {
@@ -32,6 +33,10 @@ module.exports = {
                 LAST_NAME_IS_REQUIRED: 'Error: Last Name is required',
                 POSTAL_CODE_IS_REQUIRED: 'Error: Postal Code is required'
             }
+        },
+        COMPLETE:{
+            HEADER:'Thank you for your order!',
+            TEXT: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!'
         }
     },
     PRODUCT_NAMES: [

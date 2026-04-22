@@ -1,8 +1,8 @@
 const { faker } = require('@faker-js/faker');
-const { test, expect } = require('../../lib/fixtures');
+const { test, expect } = require('../../lib/fixtures.js');
 const { PRODUCT_NAMES, MESSAGES, DEFAULT_TIMEOUT } = require('../../constants/TestData.js');
 
-test.describe('Your information tests', () => {
+test.describe('Checkout: Your information tests', () => {
   
   test.beforeEach(async ({ productsPage, shoppingCartPage }) => {
     await shoppingCartPage.goto();
@@ -14,7 +14,6 @@ test.describe('Your information tests', () => {
     }
     await productsPage.goto();
   });
-
 
   // FILL ALL THE INPUTS AND BE REDIRECTED TO THE OVERVIEW PAGE
   test(`As a standard user, I should be able fill all the inputs and be redirected to the overview.`, async ({ productsPage, shoppingCartPage, yourInformationPage, overviewPage }) => {
