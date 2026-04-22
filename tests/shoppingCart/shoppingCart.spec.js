@@ -3,14 +3,7 @@ const { PRODUCT_NAMES } = require('../../constants/TestData.js');
 
 test.describe('Shopping cart tests', () => {
   
-  test.beforeEach(async ({ productsPage, shoppingCartPage }) => {
-    await shoppingCartPage.goto();
-    if (await shoppingCartPage.navBar.shoppingCartBadgeSpan.isVisible()) {
-      const items = Number(await shoppingCartPage.navBar.shoppingCartBadgeSpan.textContent());
-      for (let i = 0; i < items; i++) {
-        await shoppingCartPage.removeProductByIndex(0); 
-      }
-    }
+  test.beforeEach(async ({ productsPage }) => {
     await productsPage.goto();
   });
 
