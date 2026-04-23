@@ -33,6 +33,11 @@ class YourInformationPage {
     await this.continueBtn.click();
   }
 
+  async navigateToAllItems(){
+    await this.navBar.burgerMenuBtn.click();
+    await this.sideBar.allItemsBtn.click();
+  }
+
 }
 
 module.exports = { YourInformationPage };

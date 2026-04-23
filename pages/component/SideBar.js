@@ -6,6 +6,8 @@ class SideBar {
   constructor(page) {
     this.page = page;
     this.logoutBtn = page.locator('data-test=logout-sidebar-link');
+    this.allItemsBtn = page.locator('data-test=inventory-sidebar-link');
+    
   }
 }
 

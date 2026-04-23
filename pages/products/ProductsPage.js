@@ -33,17 +33,16 @@ class ProductsPage {
     return context.getByRole('button', { name: buttonNames[action] });
   }
 
-  async removeProductFromCart(indexes) {
-    const sortedIndexes = this.getSortedIndexes(indexes);
+  async removeProductFromCart() {
     const removeButton = this.handleButtonAction('remove');
-    for (const index of sortedIndexes) {
-      await removeButton.nth(index).click();
+    while (await removeButton.first().isVisible()){
+      await removeButton.first().click();
     }
   }
 
   async addProductToCartByIndex(indexes) {
     const sortedIndexes = this.getSortedIndexes(indexes);
-    const addButton = this.handleButtonAction('add');       
+    const addButton = this.handleButtonAction('add');     
     for (const index of sortedIndexes) {
       await addButton.nth(index).click();
     }
@@ -55,6 +54,11 @@ class ProductsPage {
       const addButton = this.handleButtonAction('add', productContainer);
       await addButton.click();
     }
+  }
+
+  getProductButtonState(index, expectedAction) {
+    const productContainer = this.inventoryItems.nth(index);
+    return this.handleButtonAction(expectedAction, productContainer);
   }
 
   async getPricesList() {
