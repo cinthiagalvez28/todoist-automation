@@ -50,7 +50,7 @@ TODOIST-AUTOMATION/
 │   │   └── ShoppingCartPage.js
 ├── tests/                          # Test scripts organized by modules
 │   ├── checkout/
-│   │   └── checkoutFlow.spec.js
+│   │   └── complete.spec.js
 │   │   └── overview.spec.js
 │   │   └── yourInformation.spec.js
 │   ├── login/
@@ -61,6 +61,8 @@ TODOIST-AUTOMATION/
 │   │   └── products.spec.js
 │   ├── shoppingCart/
 │   │   └── shoppingCart.spec.js
+│   ├── uiStates/
+│   │   └── uiStates.spec.js
 ├── .env                            # Environment variables (Credentials, URLs)
 ├── .gitignore                      # Files and folders excluded from Git
 ├── eslint.config.mjs               # Linter rules configuration
@@ -108,6 +110,7 @@ The following core libraries are required to run and manage this testing framewo
 | `npm run test:your_information` | Run only Checkout: Your Information tests. |
 | `npm run test:overview` | Run only Checkout: Overview tests. |
 | `npm run test:checkout` | Run only Checkout: Complete tests. |
+| `npm run test:ui_states` | Run only UI_state tests. |
 | `npm run report` | Generate and open the last Allure report. |
 | `npm run lint` | Execute linter to verify the code quality. 
 

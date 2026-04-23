@@ -17,21 +17,21 @@ test.describe('Products tests', () => {
   test('Add Products to Cart by index: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage }) => {
     const productsToAdd = [1, 3, 4];
     await productsPage.addProductToCartByIndex(productsToAdd);  
-    await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('3');
+    await expect(productsPage.navBar.shoppingCartBadgeSpan).toHaveText(String(productsToAdd.length));
   });
 
   test('@smoke Add Products to Cart by name: As a standard user, I should be able to add 1 or more products to cart.', async ({ productsPage, shoppingCartPage}) => {
     await productsPage.addProductsToCartByName('add',PRODUCT_NAMES); 
     const shoppingCartNames = await shoppingCartPage.getCartItemNames();
     expect(shoppingCartNames).toEqual(expect.arrayContaining(PRODUCT_NAMES));
+    await expect(productsPage.navBar.shoppingCartBadgeSpan).toHaveText(String(PRODUCT_NAMES.length));
   });
 
   test('@smoke Remove Product in Cart: As a standard user, I should be able to remove a product to cart.', async ({ productsPage }) => {
     const productsToAdd = [2];
     await productsPage.addProductToCartByIndex(productsToAdd);
-    await expect(productsPage.navBar.shoppingCartBadgeSpan).toContainText('1');
-    
-    await productsPage.removeProductFromCart([0]);
+    await expect(productsPage.navBar.shoppingCartBadgeSpan).toHaveText(String(productsToAdd.length));
+    await productsPage.removeProductFromCart();
     await expect(productsPage.navBar.shoppingCartBadgeSpan).not.toBeVisible();
   });
 
